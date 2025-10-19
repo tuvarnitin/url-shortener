@@ -21,7 +21,7 @@ export const UrlProvider = ({ children }) => {
         draggable:true,
     });
 
-const BACKEND_URL = "http://localhost:3000"
+    const BACKEND_URL = "https://surl-eight.vercel.app"
 
     return (
         <UrlContext.Provider value={{ BACKEND_URL, showForm, setShowForm, showLoggin, setShowLogin, isLoggedIn, setIsLoggedIn, showSideNavbar, setShowSideNavbar, user, setUser, urls, setUrls, notifySuccess,notifyError }}>
