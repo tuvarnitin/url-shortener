@@ -14,7 +14,7 @@ const AppRoutes = () => {
           <Routes>
               <Route path="/" element={<HomePage/>} />
               <Route path={`${isLoggedIn ? "/custom" : "/"}`} element={<CustomUrlForm />} />
-              <Route path="/url" element={<UrlPage />} />
+              <Route path={`${isLoggedIn ? "/url" : "/"}`} element={<UrlPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<h1 className="text-4xl font-bold">404 Page Not Found</h1>} />
