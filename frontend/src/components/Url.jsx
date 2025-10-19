@@ -3,16 +3,17 @@ import CodeEditor from './CodeEditor';
 import axios from 'axios';
 import Buttons from './Buttons';
 import { UrlContext } from '../../contexts/UrlContext';
+import api from '../utils/api';
 
-const Url = ({url}) => {
+const Url = ({ url, fetchUrls }) => {
     const [urlName, setUrlName] = useState("Name");
     const [isEditing, setIsEditing] = useState(false);
     const [showPop, setShowPop] = useState(false);
-    const { BACKEND_URL, notifySuccess } = useContext(UrlContext)
+    const { notifySuccess } = useContext(UrlContext)
 
     const updateUrlDetails = async () => {
         setShowPop(false)
-        await axios.put(`${BACKEND_URL}/api/url/${url._id}`, { urlName: urlName.trim() });
+        await api.put(`/api/url/${url._id}`, { urlName: urlName.trim() });
         notifySuccess("Url updated")
     }
 
@@ -40,7 +41,7 @@ const Url = ({url}) => {
                 <p>Clicks: {url.clicks}</p>
             </div>
             <div className='flex h-full gap-2 items-center pr-6 w-full'>
-                <Buttons isEditing={isEditing} shortUrl={url.shortUrl} setIsEditing={setIsEditing} url={url} setShowPop={setShowPop} />
+                <Buttons isEditing={isEditing} shortUrl={url.shortUrl} setIsEditing={setIsEditing} url={url} setShowPop={setShowPop} fetchUrls={fetchUrls} />
             </div>
         </li>
     )

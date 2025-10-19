@@ -3,7 +3,8 @@ import { RxCross1 } from 'react-icons/rx'
 import { UrlContext } from '../contexts/UrlContext';
 import { Link } from 'react-router-dom';
 import { CiLock, CiUnlock } from 'react-icons/ci';
-import RegisterForm from '../forms/RegisterForm';
+import RegisterForm from './RegisterPage';
+import { useRef } from 'react';
 
 const SideNavbar = () => {
     const { setShowSideNavbar, showSideNavbar, user, isLoggedIn, setShowForm, setShowLogin, showForm } = useContext(UrlContext)
@@ -38,8 +39,8 @@ const SideNavbar = () => {
             <div className='cursor-pointer py-2 px-8 border-[#ffffff1f] justify-self-end border-[1px] border-t-[#ffffff2f]'>
                 {!isLoggedIn ?
                     <div className="flex items-center gap-3">
-                            <p>
-                                <span onClick={() => { setShowForm(true);console.log("sjfbsf") }} className="cursor-pointer hover:text-blue-400">Sing-Up </span> / <span onClick={() => { setShowForm(true); setShowLogin(true) }} className="cursor-pointer hover:text-blue-400"> Sign-In</span></p>
+                        <p>
+                            <span onClick={() => { setShowForm(true); setShowLogin(false) }} className="cursor-pointer hover:text-blue-400">Sing-Up </span> / <span onClick={() => { setShowForm(true); setShowLogin(true) }} className="cursor-pointer hover:text-blue-400"> Sign-In</span></p>
                     </div>
                     :
                     <h1 className='text-white hover:text-red-400 transition-colors duration-250' onClick={() => {

@@ -24,7 +24,7 @@ app.use("/api/url", urlRoute)
 
 app.get("/custom/:slug", redirectUrlBySlug)
 
-app.get("/urls/:userId", getUrls)
+app.get("/urls/:userid", getUrls)
 
 app.get("/:id", redirectUrl)
 

@@ -1,14 +1,14 @@
-import axios from 'axios';
 import { RxCross1 } from "react-icons/rx";
 import Loader from '../src/components/Loader';
 import { BsFillEyeFill } from 'react-icons/bs';
 import { RiEyeCloseFill } from 'react-icons/ri';
 import { useContext, useState } from 'react';
 import { UrlContext } from '../contexts/UrlContext';
+import api from '../src/utils/api';
 
 
-const LogginPage = () => {
-  const { BACKEND_URL, setShowLogin, setShowForm, setIsLoggedIn, setUser, notifyError, notifySucsess } = useContext(UrlContext)
+const LogginForm = () => {
+  const { BACKEND_URL, setShowLogin, setShowForm, setIsLoggedIn, setUser, notifyError, notifySuccess } = useContext(UrlContext)
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -23,21 +23,24 @@ const LogginPage = () => {
   }
 
   const loginUser = async () => {
-    if (!data.password || !data.email){
-      notifyError("All feilds are required")
-      return 
-    }
-    setIsLoading(true);
-    const response = await axios.post(`${BACKEND_URL}/api/auth/user/login`, data)
-    if (response.data.success) {
-      setShowForm(false);
-      setIsLoggedIn(true);
-      notifySucsess("Login Successful")
-      localStorage.setItem("userid", response.data.user._id, {})
-      setUser(response.data.user)
-      setIsLoading(false);
-    } else {
-      notifyError(response.data.message || "Internal server error , please try again after some time")
+    try {
+      setIsLoading(true);
+      if (!data.password || !data.email) {
+        notifyError("All fields are required");
+        return;
+      }
+
+      const response = await api.post('/api/auth/user/login', data);
+      if (response.data.success) {
+        setShowForm(false);
+        setIsLoggedIn(true);
+        notifySuccess("Login Successful");
+        localStorage.setItem("userid", response.data.user._id);
+        setUser(response.data.user);
+      }
+    } catch (error) {
+      notifyError(error.response?.data?.message || "Login failed. Please try again.");
+    } finally {
       setIsLoading(false);
     }
   }
@@ -55,11 +58,11 @@ const LogginPage = () => {
             {showPassword ? <BsFillEyeFill onClick={() => setShowPassword(false)} /> : <RiEyeCloseFill onClick={() => setShowPassword(true)} />}
           </div>
         </div>
-        <button className='hover:bg-blue-700 cursor-pointer bg-blue-600 sm:w-[60%] w-[70%] py-1 pb-2 font-bold tracking-wide font-sans rounded-sm user-select-none' onClick={loginUser}>{isLoading ? <Loader /> : "Login"}</button>
+        <button className='hover:bg-blue-700 cursor-pointer bg-blue-600 sm:w-[60%] w-[70%] py-1 pb-2 font-bold tracking-wide font-sans rounded-sm user-select-none' onClick={loginUser}>{isLoading ? <Loader /> : <>Login</>}</button>
         <p className='text-[max(0.9vw,12px)]'>Don't have an account? <span onClick={() => setShowLogin(false)} className='text-blue-500 cursor-pointer'>Register</span></p>
       </div>
     </>
   )
 }
 
-export default LogginPage
+export default LogginForm

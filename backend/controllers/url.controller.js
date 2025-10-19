@@ -11,7 +11,7 @@ export const createShortUrl = async (req, res) => {
         }
         const urlId = nanoid(6);
         if (userId) {
-            const exsitingUrl = await Url.findOne({ originalUrl: url })
+            const exsitingUrl = await Url.findOne({ originalUrl: url , user:userId})
             if (exsitingUrl) return res.json({
                 success: false,
                 message: "You have already shorted this url"
@@ -92,10 +92,12 @@ export const redirectUrlBySlug = async (req, res) => {
 
 export const getUrls = async (req, res) => {
     try {
-        const userId = req.params.userId;
+        const userId = req.params.userid;
+        console.log(req.params)
         if (!userId) return res.json({ success: false, message: "Access denide" })
         const urls = await findUrlsOfUser(userId);
-        res.json({ urls: urls, success: true });
+        console.log(urls)
+        res.json({ success: true ,urls: urls });
     } catch (error) {
         res.json({ success: false, message: "Intenal server Error" });
     }

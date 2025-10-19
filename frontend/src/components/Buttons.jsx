@@ -6,10 +6,13 @@ import { CiShare2 } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { useContext } from "react";
 import { UrlContext } from "../../contexts/UrlContext";
+import { useState } from "react";
+import Loader from "./Loader";
 
-const Buttons = ({ isEditing ,shortUrl,setIsEditing,url,setShowPop }) => {
+const Buttons = ({ isEditing, shortUrl, setIsEditing, url, setShowPop, fetchUrls }) => {
 
     const { BACKEND_URL,notifyError,notifySuccess } = useContext(UrlContext)
+    const [isLoading,setIsLoading] = useState(false)
 
     const handleWhatsAppShare = () => {
         const text = shortUrl;
@@ -32,10 +35,13 @@ const Buttons = ({ isEditing ,shortUrl,setIsEditing,url,setShowPop }) => {
         }
     };
     const handleDelete = async () => {
+        setIsLoading(true)
         const response = await axios.delete(`${BACKEND_URL}/api/url/${url._id}`);
         if (response.data.success) {
             notifySuccess("Link deleted successfuly")
+            fetchUrls()
         }
+        setIsLoading(false)
     }
 
     const handleSave = async () => {
@@ -71,7 +77,7 @@ const Buttons = ({ isEditing ,shortUrl,setIsEditing,url,setShowPop }) => {
             </button>
             <button className='text-sm text-white h-fit bg-red-600 py-1 px-3 rounded-full cursor-pointer border-[1px] border-[#ffffff30] flex items-center gap-2'
                 onClick={handleDelete}
-            >Delete<MdDeleteOutline /></button>
+            >{isLoading ? <Loader /> : <>Delete < MdDeleteOutline /></>}</button>
         </div>
     );
 };

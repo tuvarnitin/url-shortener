@@ -1,25 +1,35 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { ToastContainer } from "react-toastify"
 import { useEffect } from "react"
-import axios from "axios"
-import RegisterForm from "../forms/RegisterForm"
 import Navbar from "../navbars/Navbar"
-import SideNavbar from "../navbars/SideNavbar"
-import { UrlContext }  from "../contexts/UrlContext"
+import SideNavbar from "../pages/SideNavbar"
+import { UrlContext } from "../contexts/UrlContext"
 import AppRoutes from "./components/AppRoutes"
+import api from "./utils/api"
+import RegisterPage from "../pages/RegisterPage"
 
 const App = () => {
 
-  const { BACKEND_URL, setUser, showForm,setIsLoggedIn } = useContext(UrlContext)
+  const { setUser, showForm, setIsLoggedIn, notifyError } = useContext(UrlContext)
 
   const fetchUser = async () => {
-    const userid = localStorage.getItem("userid");
-    if (userid) {
-      const response = await axios.get(`${BACKEND_URL}/api/auth/user/${userid}`);
+    try {
+      const userid = localStorage.getItem("userid");
+      const token = localStorage.getItem("token");
+      if (!userid || !token) return
+
+      const response = await api.get(`api/auth/user`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       if (response.data.success) {
-        setUser(response.data.user)
+        setUser(response.data.user);
         setIsLoggedIn(true);
+      } else {
+        notifyError(response.data.message)
       }
+    } catch (err) {
+      notifyError(err)
     }
   }
   useEffect(() => {
@@ -31,9 +41,9 @@ const App = () => {
     <>
       <ToastContainer />
       <div className="w-[100vw] h-[100dvh] overflow-x-hidden relative">
+        {showForm && <RegisterPage />}
         <AppRoutes />
         <SideNavbar />
-        {showForm && <RegisterForm  />}
         <Navbar />
       </div>
     </>

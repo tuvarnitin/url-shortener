@@ -15,6 +15,6 @@ export const updateUrlInDatabase = async (id, urlName) => {
 export const deleteUrlById = async (id) => {
     return await Url.findByIdAndDelete(id);
 }
-export const findUrlsOfUser = async (userId) => {
-    return await Url.find({ user: userId });
+export const findUrlsOfUser = async (user) => {
+    return await Url.find({user});
 }
