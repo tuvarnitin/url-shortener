@@ -23,13 +23,13 @@ const Url = ({ url, fetchUrls }) => {
     }
 
     return (
-        <li key={url._id} className='h-fit relative py-4 bg-zinc-800  rounded-md w-2/7 min-w-[440px] px-0 pl-4 flex gap-2 flex-col justify-between items-start text-[max(.9vw,12px)]  border-[1px] border-[#ffffff0a] shadow-xl'>
-            {showPop && <div className='w-full h-full fixed z-11 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-[#111]/80'>
-                <div className='w-fit bg-zinc-800 border-1 py-8 px-6  rounded-md flex flex-col gap-4'>
+        <li key={url._id} className='h-fit relative py-4 bg-zinc-800  rounded-md w-2/7 min-w-[350px] px-2 flex gap-2 flex-col justify-between items-start text-[max(.9vw,12px)]  border-[1px] border-[#ffffff0a] shadow-xl'>
+            {showPop && <div className='w-full h-full fixed z-11 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-[#111]/80 px-4'>
+                <div className='w-full sm:w-[80%] md:w-[68%] lg:w-[32%] bg-zinc-800 border-1 py-8 px-6  rounded-md flex flex-col gap-4'>
                     <h1>Are you sure?</h1>
                     <div className='flex gap-4 justify-end'>
-                        <button className='cursor-pointer border-[1px] border-white py-0.5 px-4 rounded-full' onClick={handleCancel}>Cancel</button>
-                        <button className='cursor-pointer border-[1px] border-white py-0.5 px-4 rounded-full' onClick={updateUrlDetails}>Ok</button>
+                        <button className='cursor-pointer border-[1px] border-red-500 py-0.5 px-4 rounded-full' onClick={handleCancel}>Cancel</button>
+                        <button className='cursor-pointer border-[1px] border-green-500 py-0.5 px-4 rounded-full' onClick={updateUrlDetails}>Ok</button>
                     </div>
                 </div>
             </div>}
@@ -40,7 +40,7 @@ const Url = ({ url, fetchUrls }) => {
                 <p className='w-full truncate'>Short Url : <a href={url.shortUrl} target="_blank" className='text-blue-500 hover:underline'>{url.shortUrl}</a></p>
                 <p>Clicks: {url.clicks}</p>
             </div>
-            <div className='flex h-full gap-2 items-center pr-6 w-full'>
+            <div className='flex h-full gap-2 items-center w-full'>
                 <Buttons isEditing={isEditing} shortUrl={url.shortUrl} setIsEditing={setIsEditing} url={url} setShowPop={setShowPop} fetchUrls={fetchUrls} />
             </div>
         </li>

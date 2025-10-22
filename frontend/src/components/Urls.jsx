@@ -8,7 +8,7 @@ const Urls = () => {
 
     const [isReverse, setIsReverse] = useState(true)
     const { notifyError, setUrls,urls } = useContext(UrlContext)
-      const [isStandardUrls, iSetIsStandardUrls] = useState(true)   
+    const [isStandardUrls, setIsStandardUrls] = useState(true)   
 
     const fetchUrls = async () => {
         try {
@@ -32,8 +32,8 @@ const Urls = () => {
     return (
         <>
             <div className='w-full flex justify-evenly border-b-1'>
-                <button onFocus={() => iSetIsStandardUrls(true)} autoFocus={isStandardUrls && true} className='focus:bg-zinc-700 outline-none focus:rounded-tl-md py-2 w-1/2 flex justify-center border-r-[1px]'>Standard</button >
-                <button onFocus={() => iSetIsStandardUrls(false)} className='focus:bg-zinc-700 outline-none focus:rounded-tr-md py-2 w-1/2 flex justify-center'>Custom</button >
+                <button onFocus={() => setIsStandardUrls(true)} autoFocus={isStandardUrls && true} className='focus:bg-zinc-700 outline-none focus:rounded-tl-md py-2 w-1/2 flex justify-center border-r-[1px]'>Standard</button >
+                <button onFocus={() => setIsStandardUrls(false)} className='focus:bg-zinc-700 outline-none focus:rounded-tr-md py-2 w-1/2 flex justify-center'>Custom</button >
             </div>   
             <div className='custom-select-wrapper rounded-md md:self-end md:mr-[10vw] self-center my-4'>
                 <select className='bg-zinc-800 px-3 py-2 rounded-sm focus:bg-zinc-700'
@@ -75,7 +75,7 @@ const Urls = () => {
                                     <Url key={url._id} url={url} fetchUrls={fetchUrls} />
                                 ))
                                 :
-                                standardUrls.map(url =>
+                                customUrls.map(url =>
                                 (
                                     <Url key={url._id} url={url} fetchUrls={fetchUrls} />
                                 ))

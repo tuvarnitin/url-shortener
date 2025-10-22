@@ -57,7 +57,7 @@ const Buttons = ({ isEditing, shortUrl, setIsEditing, url, setShowPop, fetchUrls
 
 
     return (
-        <div className="flex w-full gap-2 flex-wrap ">
+        <div className="flex w-full gap-2 flex-wrap">
             {isEditing ? (
                 <button className='bg-zinc-900 text-sm text-white h-fit  py-1 px-3 rounded-full cursor-pointer border-[1px] border-[#ffffff30]' onClick={() => handleSave()}>Save</button>
             ) : (
