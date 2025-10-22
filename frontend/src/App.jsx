@@ -25,6 +25,8 @@ const App = () => {
       if (response.data.success) {
         setUser(response.data.user);
         setIsLoggedIn(true);
+      } else {
+        notifyError(response.data.message)
       }
     } catch (err) {
       notifyError(err)
