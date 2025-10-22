@@ -20,13 +20,15 @@ export const createShortUrl = async (req, res) => {
             const newUrl = await createShortUrlWithuser({ urlId, originalUrl: url, userId: userId });
             return res.json({
                 success: true,
-                shortUrl: newUrl.shortUrl
+                shortUrl: newUrl.shortUrl,
+                message: "Url shorted successfully"
             });
         }
         const newUrl = await createShortUrlWithoutuser({ urlId, originalUrl: url });
         res.json({
             success: true,
-            shortUrl: newUrl.shortUrl
+            shortUrl: newUrl.shortUrl,
+            message:"Url shorted successfully"
         })
     } catch (error) {
         res.json({
@@ -49,7 +51,7 @@ export const createCustomUrl = async (req, res) => {
             return res.json({
                 success: true,
                 shortUrl: newUrl.shortUrl,
-                message: "Url created successfuly"
+                message: "Url shorted successfuly"
             });
         }
         res.json({

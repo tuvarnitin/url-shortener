@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import { RxCross1 } from 'react-icons/rx'
-import { UrlContext } from '../contexts/UrlContext';
 import { Link } from 'react-router-dom';
+
+import { RxCross1 } from 'react-icons/rx'
 import { CiLock, CiUnlock } from 'react-icons/ci';
-import RegisterForm from './RegisterPage';
-import { useRef } from 'react';
+
+import { UrlContext } from '../contexts/UrlContext';
+import RegisterForm from '../pages/RegisterPage';
 
 const SideNavbar = () => {
     const { setShowSideNavbar, showSideNavbar, user, isLoggedIn, setShowForm, setShowLogin, showForm } = useContext(UrlContext)
@@ -16,7 +17,7 @@ const SideNavbar = () => {
                 <RxCross1 size={24} />
             </div>
             <div className='flex items-center gap-4 border-b-[1px] border-[#ffffff1f] py-4 px-8' >
-                <img src="https://plus.unsplash.com/premium_vector-1745915292281-7f426c5b7d2a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880" alt="" width={50} className="rounded-full cursor-pointer border-1 border-zinc-600" />
+                <img src={user.avatar ? user.avatar : "https://plus.unsplash.com/premium_vector-1745915292281-7f426c5b7d2a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880"} alt="" width={50} className="rounded-full cursor-pointer border-1 border-zinc-600" />
                 <div>
                     <h2 className='font-bold text-lg mt-2'>{user?.name}</h2>
                     <p className='text-sm text-gray-400'>{user?.email}</p>

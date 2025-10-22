@@ -1,14 +1,16 @@
 import { useContext, useState } from "react"
 import { Link } from "react-router-dom";
+
 import { CiUnlock } from "react-icons/ci";
 import { CiLock } from "react-icons/ci";
 import { RiMenuUnfold2Line } from "react-icons/ri";
 import { RiMenuUnfoldLine } from "react-icons/ri";
+
 import { UrlContext } from "../contexts/UrlContext";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const { setShowForm, setShowLogin, isLoggedIn, setShowSideNavbar } = useContext(UrlContext)
+  const { setShowForm, setShowLogin, isLoggedIn, setShowSideNavbar,user } = useContext(UrlContext)
 
   return (
     <nav className="fixed top-0 left-0 w-full text-white py-3 lg:px-20 px-6  border-b-[1px] border-[#ffffff0a] bg-zinc-800">
@@ -44,8 +46,9 @@ const Navbar = () => {
               <span onClick={() => { setShowForm(true); setShowLogin(false) }} className="cursor-pointer hover:text-blue-400">Sing-Up </span> / <span onClick={() => { setShowForm(true); setShowLogin(true) }} className="cursor-pointer hover:text-blue-400"> Sign-In</span></p>
             :
             <div className="overflow-x-hidden z-[111]" onClick={() => setShowSideNavbar(true)}>
-              <img src="https://plus.unsplash.com/premium_vector-1745915292281-7f426c5b7d2a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880" alt="" width={50} className="rounded-full cursor-pointer hover:border-1 hover:border-[#ffffff1a]" />
-            </div>}
+              <img src={user.avatar ? user.avatar : "https://plus.unsplash.com/premium_vector-1745915292281-7f426c5b7d2a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880"} alt="" width={50} className="rounded-full cursor-pointer hover:border-1 hover:border-[#ffffff1a]" />
+            </div>
+            }
         </div>
       </div>
       <div className="flex lg:hidden justify-self-end" onClick={() => setShowSideNavbar(true)}>

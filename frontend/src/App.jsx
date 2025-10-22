@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { ToastContainer } from "react-toastify"
 import { useEffect } from "react"
 import Navbar from "../navbars/Navbar"
-import SideNavbar from "../pages/SideNavbar"
+import SideNavbar from "../navbars/SideNavbar"
 import { UrlContext } from "../contexts/UrlContext"
 import AppRoutes from "./components/AppRoutes"
 import api from "./utils/api"
@@ -19,14 +19,12 @@ const App = () => {
       if (!userid || !token) return
 
       const response = await api.get(`api/auth/user`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (response.data.success) {
         setUser(response.data.user);
         setIsLoggedIn(true);
-      } else {
-        notifyError(response.data.message)
       }
     } catch (err) {
       notifyError(err)

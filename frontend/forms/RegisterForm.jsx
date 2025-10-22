@@ -1,15 +1,16 @@
-import axios from 'axios'
 import { useContext, useState } from 'react'
+import axios from 'axios'
 import { RxCross1 } from "react-icons/rx";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { BsFillEyeFill } from "react-icons/bs";
+
 import { UrlContext } from '../contexts/UrlContext';
-import Loader from '../src/components/Loader';
+import Loader from '../loaders/Loader';
 
 const RegisterPage = () => {
-    const { BACKEND_URL, setShowLogin, setShowForm, setUser, setIsLoggedIn,notifySuccess,notifyError } = useContext(UrlContext)
-    const [isLoading,setIsLoading] = useState(false)
-    
+    const { BACKEND_URL, setShowLogin, setShowForm, setUser, setIsLoggedIn, notifySuccess, notifyError } = useContext(UrlContext)
+    const [isLoading, setIsLoading] = useState(false)
+
     const [showPassword, setShowPassword] = useState(false);
 
     const [data, setData] = useState({
@@ -37,7 +38,7 @@ const RegisterPage = () => {
             setIsLoggedIn(true);
             localStorage.setItem("userid", response.data.user._id)
             setIsLoading(false)
-        }else{
+        } else {
             notifyError(response.data.message)
             setIsLoading(false)
         }
@@ -52,7 +53,11 @@ const RegisterPage = () => {
                 <input className='sm:w-[60%] w-[70%] rounded-sm py-1 px-3 outline-none border-[1px] border-white' type="text" placeholder='Enter Name' value={data.name} onChange={(e) => handleInput(e)} name='name' required />
                 <input className='sm:w-[60%] w-[70%] rounded-sm py-1 px-3 outline-none border-[1px] border-white' type="text" placeholder='Enter Email' value={data.email} onChange={(e) => handleInput(e)} name='email' required />
                 <div className='sm:w-[60%] w-[70%] flex items-center relative'>
-                    <input className='w-full rounded-sm py-1 px-3 outline-none border-[1px] border-white' type={showPassword ? "text" : "password"} placeholder='Enter Password' value={data.password} onChange={(e) => handleInput(e)} name='password' required />
+                    <input className='w-full rounded-sm py-1 px-3 outline-none border-[1px] border-white' type={showPassword ? "text" : "password"} placeholder='Enter Password' value={data.password} onChange={(e) => handleInput(e)} name='password' required onKeyDown={(e)=>{
+                                if(e.key === 'Enter'){
+                                  registerUser()
+                                }
+                              }} />
                     <div className='absolute right-3 cursor-pointer'>
                         {showPassword ? <BsFillEyeFill onClick={() => setShowPassword(false)} /> : <RiEyeCloseFill onClick={() => setShowPassword(true)} />}
                     </div>

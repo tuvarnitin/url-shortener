@@ -5,14 +5,14 @@ import { RiAttachment2 } from "react-icons/ri";
 import { CiShare2 } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { useContext } from "react";
-import { UrlContext } from "../../contexts/UrlContext";
+import { UrlContext } from "../contexts/UrlContext";
 import { useState } from "react";
-import Loader from "./Loader";
+import Loader from "../loaders/Loader";
 
 const Buttons = ({ isEditing, shortUrl, setIsEditing, url, setShowPop, fetchUrls }) => {
 
-    const { BACKEND_URL,notifyError,notifySuccess } = useContext(UrlContext)
-    const [isLoading,setIsLoading] = useState(false)
+    const { BACKEND_URL, notifyError, notifySuccess } = useContext(UrlContext)
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleWhatsAppShare = () => {
         const text = shortUrl;
@@ -21,8 +21,14 @@ const Buttons = ({ isEditing, shortUrl, setIsEditing, url, setShowPop, fetchUrls
     };
 
     const handleCopyLink = () => {
-        navigator.clipboard.writeText(shortUrl);
-        notifySuccess("Link copied to clipboard")
+        navigator.clipboard.writeText(shortUrl)
+            .then(() => {
+                notifySuccess("Link copied to clipboard")
+            })
+            .catch((err)=>{
+                notifyError(err.message)
+            })
+           
     };
 
     const handleWebShare = async () => {

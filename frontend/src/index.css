@@ -24,3 +24,27 @@ html,body,#root{
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #111, #222);
 }
+
+.custom-select-wrapper {
+    position: relative; /* Essential for positioning the ::after element */
+    display: inline-block; /* Or block, depending on layout */
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px; /* Space for the custom arrow */
+    /* Other styling like border, color, padding */
+}
+
+.custom-select-wrapper::after {
+    content: '▼'; /* Or use a more subtle symbol or border-based triangle */
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Position from the right */
+    transform: translateY(-50%);
+    pointer-events: none; /* Ensures clicks go through to the select element */
+    color: #fff; /* Arrow color */
+    font-size: 10px; /* Adjust size */
+}

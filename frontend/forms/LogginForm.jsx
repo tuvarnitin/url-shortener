@@ -1,9 +1,11 @@
 import { RxCross1 } from "react-icons/rx";
-import Loader from '../src/components/Loader';
 import { BsFillEyeFill } from 'react-icons/bs';
 import { RiEyeCloseFill } from 'react-icons/ri';
+
 import { useContext, useState } from 'react';
+
 import { UrlContext } from '../contexts/UrlContext';
+import Loader from '../loaders/Loader';
 import api from '../src/utils/api';
 
 
@@ -44,6 +46,7 @@ const LogginForm = () => {
       setIsLoading(false);
     }
   }
+  
 
   return (
     <>
@@ -53,7 +56,11 @@ const LogginForm = () => {
         </div>
         <input className='sm:w-[60%] w-[70%] rounded-sm py-1 px-3 outline-none border-[1px] border-white' type="text" placeholder='Enter Email' value={data.email} onChange={(e) => handleInput(e)} name='email' required />
         <div className='sm:w-[60%] w-[70%] flex items-center relative'>
-          <input className='w-full rounded-sm py-1 px-3 outline-none border-[1px] border-white' type={showPassword ? "text" : "password"} placeholder='Enter Password' value={data.password} onChange={(e) => handleInput(e)} name='password' required />
+          <input className='w-full rounded-sm py-1 px-3 outline-none border-[1px] border-white' type={showPassword ? "text" : "password"} placeholder='Enter Password' value={data.password} onChange={(e) => handleInput(e)} name='password' required onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              loginUser()
+            }
+          }} />
           <div className='absolute right-3 cursor-pointer'>
             {showPassword ? <BsFillEyeFill onClick={() => setShowPassword(false)} /> : <RiEyeCloseFill onClick={() => setShowPassword(true)} />}
           </div>

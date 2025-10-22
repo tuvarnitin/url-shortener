@@ -33,5 +33,5 @@ const urlScheme = new mongoose.Schema({
     }
 })
 
-const urlModel = mongoose.models.Url || mongoose.model("Url", urlScheme);
+const urlModel = mongoose.models.urls || mongoose.models.url || mongoose.model("url", urlScheme);
 export default urlModel

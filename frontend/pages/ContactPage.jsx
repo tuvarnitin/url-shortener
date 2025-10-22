@@ -2,11 +2,11 @@
 import { useContext, useState } from 'react'
 import { UrlContext } from '../contexts/UrlContext'
 import axios from 'axios'
-import Loader from '../src/components/Loader'
+import Loader from '../loaders/Loader'
 import { MdAttachEmail } from "react-icons/md";
 import { FaGit, FaGithub, FaInstagram, FaLinkedin, FaPhone, FaWhatsapp } from 'react-icons/fa6';
 const ContactPage = () => {
-  const { notifySuccess, notifyError,BACKEND_URL } = useContext(UrlContext)
+  const { notifySuccess, notifyError, BACKEND_URL } = useContext(UrlContext)
   const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -18,7 +18,7 @@ const ContactPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      if(!formData.name || !formData.email || !formData.message){
+      if (!formData.name || !formData.email || !formData.message) {
         notifyError("All feilds are required")
         return
       }
@@ -107,7 +107,7 @@ const ContactPage = () => {
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-             {isLoading ? <Loader /> : "Send" }
+              {isLoading ? <Loader /> : "Send"}
             </button>
           </div>
         </form>

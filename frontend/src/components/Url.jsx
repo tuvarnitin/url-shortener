@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import CodeEditor from './CodeEditor';
 import axios from 'axios';
-import Buttons from './Buttons';
+import Buttons from '../../buttons/Buttons';
 import { UrlContext } from '../../contexts/UrlContext';
 import api from '../utils/api';
 

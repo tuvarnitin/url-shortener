@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import api from '../src/utils/api';
-import FullPageLoader from "../src/components/FullPageLoader";
+import FullPageLoader from "../loaders/FullPageLoader";
 
 export const UrlContext = createContext();
 

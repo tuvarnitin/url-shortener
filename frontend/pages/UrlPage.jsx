@@ -1,16 +1,39 @@
-import { lazy, Suspense } from 'react';
-import FullPageLoader from '../src/components/FullPageLoader';
-
+import { lazy, Suspense, useContext } from 'react';
+import FullPageLoader from '../loaders/FullPageLoader';
+import { useState } from 'react';
+import { UrlContext } from '../contexts/UrlContext';
 const Urls = lazy(() => import("../src/components/Urls"))
 
 const UrlPage = () => {
 
+  const [isStandardUrls, iSetIsStandardUrls] = useState(true)
+  const {urls} = useContext(UrlContext)
+  const standardUrls = urls.filter((url)=> !url.slug)
+  const customUrls = urls.filter((url)=> url.slug)
+
   return (
     <>
-      <div className='flex w-full h-full px-4 text-white flex-col gap-4 py-20 items-center overflow-x-hidden overflow-y-auto'>
+      <div className='flex w-full h-full px-4 text-white flex-col gap-4 py-20 items-center overflow-x-hidden overflow-y-auto relative'>
         <Suspense fallback={<FullPageLoader />}>
-          <h1 className='text-[max(2.1vw,22px)] font-bold'>Your URLs</h1>
-          <Urls />
+        <div className='w-full justify-center'>
+            <div className='w-full flex justify-evenly border-b-1'>
+              <button onFocus={()=>iSetIsStandardUrls(true)} autoFocus={true} className='focus:bg-zinc-700 outline-none focus:rounded-tl-md py-2 w-1/2 flex justify-center border-r-[1px]'>Standard</button >
+              <button onFocus={()=>iSetIsStandardUrls(false)} className='focus:bg-zinc-700 outline-none focus:rounded-tr-md py-2 w-1/2 flex justify-center'>Custom</button >
+              </div>    
+         
+            {isStandardUrls ? 
+           <>
+                
+                <Urls urls={standardUrls} />
+           </>
+        :
+              <>
+                <Urls urls={customUrls} />
+              </>
+        }
+
+                   
+        </div>
         </Suspense>
       </div>
     </>
