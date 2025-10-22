@@ -19,20 +19,8 @@ const UrlPage = () => {
             <div className='w-full flex justify-evenly border-b-1'>
               <button onFocus={()=>iSetIsStandardUrls(true)} autoFocus={true} className='focus:bg-zinc-700 outline-none focus:rounded-tl-md py-2 w-1/2 flex justify-center border-r-[1px]'>Standard</button >
               <button onFocus={()=>iSetIsStandardUrls(false)} className='focus:bg-zinc-700 outline-none focus:rounded-tr-md py-2 w-1/2 flex justify-center'>Custom</button >
-              </div>    
-         
-            {isStandardUrls ? 
-           <>
-                
-                <Urls urls={standardUrls} />
-           </>
-        :
-              <>
-                <Urls urls={customUrls} />
-              </>
-        }
-
-                   
+              </div> 
+                <Urls urls={isStandardUrls ? standardUrls : customUrls} />               
         </div>
         </Suspense>
       </div>
