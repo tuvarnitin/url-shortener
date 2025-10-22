@@ -57,7 +57,7 @@ const Urls = () => {
                                     <Url key={url._id} url={url} fetchUrls={fetchUrls} />
                                 ))
                                 :
-                                urls.map(url =>
+                                standardUrls.map(url =>
                                 (
                                     <Url key={url._id} url={url} fetchUrls={fetchUrls} />
                                 ))
@@ -75,7 +75,7 @@ const Urls = () => {
                                     <Url key={url._id} url={url} fetchUrls={fetchUrls} />
                                 ))
                                 :
-                                urls.map(url =>
+                                standardUrls.map(url =>
                                 (
                                     <Url key={url._id} url={url} fetchUrls={fetchUrls} />
                                 ))
