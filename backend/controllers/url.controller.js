@@ -95,10 +95,8 @@ export const redirectUrlBySlug = async (req, res) => {
 export const getUrls = async (req, res) => {
     try {
         const userId = req.params.userid;
-        console.log(req.params)
         if (!userId) return res.json({ success: false, message: "Access denide" })
         const urls = await findUrlsOfUser(userId);
-        console.log(urls)
         res.json({ success: true ,urls: urls });
     } catch (error) {
         res.json({ success: false, message: "Intenal server Error" });
