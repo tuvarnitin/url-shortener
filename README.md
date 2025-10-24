@@ -143,7 +143,7 @@ url-shortener/
    ```
 4. **Frontend Environment Variables**
 
-   Create a `.env` file in the backend directory:
+   Create a `.env` file in the frontend directory:
    ```env
    VITE_BACKEND_URL=http://localhost:3000
    ```
