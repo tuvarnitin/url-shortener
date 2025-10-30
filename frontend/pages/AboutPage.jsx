@@ -33,16 +33,6 @@ const AboutPage = () => {
           It demonstrates how frontend and backend logic work together to deliver a seamless and functional user experience.
         </p>
       </div>
-
-      <div className="text-left text-white bg-zinc-800 rounded-2xl p-8 border-[1px] border-[#ffffff0a] shadow-xl">
-        <h3 className="text-[max(1.3vw,16px)] font-semibold mb-4">🧩 Tech Stack</h3>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <li><span className="font-semibold text-blue-600">Frontend:</span> React</li>
-          <li><span className="font-semibold text-blue-600">Backend:</span> Node.js, Express.js</li>
-          <li><span className="font-semibold text-blue-600">Database:</span> MongoDB</li>
-          <li><span className="font-semibold text-blue-600">Authentication:</span> JWT (JSON Web Token)</li>
-        </ul>
-      </div>
     </div>
   )
 }
