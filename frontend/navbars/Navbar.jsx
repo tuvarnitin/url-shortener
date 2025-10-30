@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full text-white py-3 lg:px-20 px-6  border-b-[1px] border-[#ffffff0a] bg-zinc-800">
       <div className="w-full h-full justify-between items-center bg-zinc-800 z-10 hidden lg:flex">
-        <h1 className="font-bold text-3xl tracking-widest"><Link to="/"><span className="text-red-500 font-mono">url</span>IFY</Link></h1>
+        <h1 className={`font-bold text-3xl tracking-widest`}><Link to="/"><span className={`font-mono  ${isLoggedIn ? "text-green-500 " : "text-red-500"}`}>url</span>IFY</Link></h1>
         <ul className="lg:flex gap-10 text-lg font-medium justify-center hidden">
           <li>
             <Link to="/">Home</Link>
