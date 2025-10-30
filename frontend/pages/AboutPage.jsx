@@ -22,7 +22,7 @@ const AboutPage = () => {
             Powered by Node.js and Express.js, with MongoDB for efficient data handling.
           </li>
         </ul>
-    </div>
+        </div>
   )
 }
 
